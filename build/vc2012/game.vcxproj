@@ -87,6 +87,7 @@
     <ClCompile Include="..\..\source\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\Entity.h" />
     <ClInclude Include="..\..\include\Game.h" />
     <ClInclude Include="..\..\include\GameImp.h" />
   </ItemGroup>
