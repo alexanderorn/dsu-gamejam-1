@@ -2,6 +2,7 @@
 #include <ResourceManager.h>
 #include <SFML/Window/Event.hpp>
 #include <iostream>
+#include <MemoryLeak.h>
 
 GameImp::GameImp( )
 {

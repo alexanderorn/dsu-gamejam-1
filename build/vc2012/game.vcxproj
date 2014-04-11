@@ -92,6 +92,7 @@
     <ClInclude Include="..\..\include\DynamicBody.h" />
     <ClInclude Include="..\..\include\Entity.h" />
     <ClInclude Include="..\..\include\Game.h" />
+    <ClInclude Include="..\..\include\MemoryLeak.h" />
     <ClInclude Include="..\..\include\ResourceManager.h" />
     <ClInclude Include="..\..\include\GameImp.h" />
   </ItemGroup>

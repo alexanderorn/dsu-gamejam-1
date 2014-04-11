@@ -1,5 +1,6 @@
 #include <ResourceManager.h>
 #include <iostream>
+#include <MemoryLeak.h>
 
 ResourceManager::TextureMap ResourceManager::s_Textures;
 sf::Texture * ResourceManager::s_pErrorTexture = NULL;
@@ -49,10 +50,11 @@ bool ResourceManager::Initialize( )
 	}
 	s_pErrorTexture = new sf::Texture;
 
+	// Create an image
 	sf::Image image;
 	image.create( 2, 2, data );
 	
-	// Load the file from memory
+	// Load the texture from the image.
 	if( s_pErrorTexture->loadFromImage( image, sf::IntRect( 0, 0, 2, 2 ) ) == false )
 	{
 		std::cout << "[ResourceManager::Initialize] Can not load the default texture." << std::endl;

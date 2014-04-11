@@ -1,5 +1,6 @@
 #pragma once
 #include <DynamicBody.h>
+#include <MemoryLeak.h>
 
 DynamicBody::DynamicBody(b2World& world, 
 						 float x, 
