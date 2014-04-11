@@ -15,7 +15,7 @@ public:
 private:
 	ResourceManager();
 	
-	static bool LoadTextures(const std::string &filename);	
+//	static bool LoadTextures(const std::string &filename);	
 	
 	static void UnloadTextures();
 

@@ -1,6 +1,6 @@
 #include <ResourceManager.h>
 #include <iostream>
-
+/*
 sf::Texture& ResourceManager::GetTexture(const std::string &filename)
 {
 	TextureMap::iterator & it = mTextureMap.find( filename );
@@ -29,4 +29,4 @@ bool ResourceManager::LoadTextures( const std::string &filename )
 	return true;
 }
 
-
+*/

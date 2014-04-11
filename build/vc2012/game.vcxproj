@@ -83,12 +83,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Game.cpp" />
+    <ClCompile Include="..\..\source\GameImp.cpp" />
     <ClCompile Include="..\..\source\Main.cpp" />
     <ClCompile Include="..\..\source\ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\Entity.h" />
     <ClInclude Include="..\..\include\Game.h" />
     <ClInclude Include="..\..\include\ResourceManager.h" />
+    <ClInclude Include="..\..\include\GameImp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
