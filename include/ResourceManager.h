@@ -5,23 +5,30 @@
 
 class ResourceManager
 {
-public:
-	static sf::Texture& GetTexture(const std::string &filename);
-	static bool LoadTextures(const std::string &filename);
 
-	static bool Load();
-	static void Unload();
+public:
+
+
+	// Public functions
+	static sf::Texture & GetTexture(const std::string &filename);
+	static bool Initialize( );
+	static void Unload( );
+	static void ClearAllTextures( );
 
 private:
-	ResourceManager();
 	
-//	static bool LoadTextures(const std::string &filename);	
-	
-	static void UnloadTextures();
-
+	// Typedefs
 	typedef std::unordered_map<std::string, sf::Texture*> TextureMap;
-	static TextureMap mTextureMap;
 
+	// Private functions
+
+	// Private variable members
+	static TextureMap s_Textures;
+	static sf::Texture * s_pDefaultTexture;
+
+	// Private constructors and assign operator
+	ResourceManager( );
 	ResourceManager(const ResourceManager&);
 	ResourceManager& operator = (const ResourceManager&);
+
 };

@@ -16,11 +16,11 @@ public:
 private:
 
 	// Private functions
-	void Render( );
+	bool Load( );
+	int Unload( );
 	bool Update( float deltaTime );
 	bool HandleEvents( float deltaTime );
-	int Unload( );
-
+	void Render( );
 
 	// Private varaibles
 	sf::RenderWindow m_Window;

@@ -1,4 +1,5 @@
 #include <GameImp.h>
+#include <ResourceManager.h>
 #include <SFML/Window/Event.hpp>
 #include <iostream>
 
@@ -12,16 +13,9 @@ GameImp::~GameImp( )
 
 int GameImp::Run( int argv, char ** argc )
 {
-	// Create the game window
-	const sf::Vector2i windowSize( 800, 600 );
-	const sf::VideoMode videoMode( windowSize.x, windowSize.y );
-	const sf::Uint32 style =	sf::Style::Close |
-								sf::Style::Titlebar;
-
-	m_Window.create( videoMode, style );
-	if( m_Window.isOpen( ) == false )
+	// Load the game
+	if( Load( ) == false )
 	{
-		std::cout << "[GameImp::Run] Can not create the window" << std::endl;
 		return Unload( );
 	}
 
@@ -44,17 +38,42 @@ int GameImp::Run( int argv, char ** argc )
 	return Unload( );
 }
 
-void GameImp::Render( )
+bool GameImp::Load( )
 {
-	// Clear the color
-	m_Window.clear( );
+	// Create the game window
+	const sf::Vector2i windowSize( 800, 600 );
+	const sf::VideoMode videoMode( windowSize.x, windowSize.y );
+	const sf::Uint32 style =	sf::Style::Close |
+								sf::Style::Titlebar;
 
-	// Draw primitives
-	// ...
+	m_Window.create( videoMode, style );
+	if( m_Window.isOpen( ) == false )
+	{
+		std::cout << "[GameImp::Load] Can not create the window" << std::endl;
+		return false;
+	}
+	m_Window.setTitle( "Ninja game" );
 
-	// Dislay the window
-	m_Window.display( );
+	// Initialize the resource manager
+	if( ResourceManager::Initialize( ) == false )
+	{
+		std::cout << "[GameImp::Load] Can not initialize the resoruce manager." << std::endl;
+		return false;
+	}
+
+	return true;
 }
+
+int GameImp::Unload( )
+{
+
+	// Unload the resource manager
+	ResourceManager::Unload( );
+
+	// Succeeded
+	return 0;
+}
+
 bool GameImp::Update( float deltaTime )
 {
 	// Handle events
@@ -79,6 +98,18 @@ bool GameImp::HandleEvents( float deltaTime )
 				m_Window.close( );
 			}
 			break;
+			case sf::Event::KeyReleased:
+			{
+				switch( e.key.code )
+				{
+					case sf::Keyboard::Escape:
+					{
+						m_Window.close( );
+					}
+					break;
+				}
+			}
+			break;
 		}
 	}
 
@@ -86,9 +117,14 @@ bool GameImp::HandleEvents( float deltaTime )
 	return true;
 }
 
-int GameImp::Unload( )
+void GameImp::Render( )
 {
+	// Clear the color
+	m_Window.clear( );
 
+	// Draw primitives
+	// ...
 
-	return 0;
+	// Dislay the window
+	m_Window.display( );
 }
