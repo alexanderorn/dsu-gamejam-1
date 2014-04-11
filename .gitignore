@@ -1,0 +1,30 @@
+# Directories #
+Obj
+/obj
+/Bin
+/bin
+
+# Compiled #
+*.obj
+*.exe
+
+# Build #
+*.exp
+*.ncb
+*.suo
+*.user
+*.pdb
+*.sdf
+*.opensdf
+*.layout
+*.depend
+*.filters
+*.DS_Store
+*.log
+*.tlog
+*.idb
+*.autosave
+
+# Extra #
+
+
