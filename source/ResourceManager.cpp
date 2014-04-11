@@ -2,7 +2,7 @@
 #include <iostream>
 
 ResourceManager::TextureMap ResourceManager::s_Textures;
-sf::Texture * ResourceManager::s_pDefaultTexture = NULL;
+sf::Texture * ResourceManager::s_pErrorTexture = NULL;
 
 sf::Texture & ResourceManager::GetTexture(const std::string &filename)
 {
@@ -20,12 +20,17 @@ sf::Texture & ResourceManager::GetTexture(const std::string &filename)
 	if( pTexture->loadFromFile( filename ) == false)
 	{
 		std::cout << "[ResourceManager::GetTexture] Can not load the texture." << std::endl;
-		return *s_pDefaultTexture;
+		return *s_pErrorTexture;
 	}
 
 	// Add and return the texture
 	s_Textures[filename] = pTexture;
 	return *pTexture;
+}
+
+sf::Texture & ResourceManager::GetErrorTexture( )
+{
+	return *s_pErrorTexture;
 }
 
 bool ResourceManager::Initialize( )
@@ -38,33 +43,33 @@ bool ResourceManager::Initialize( )
 	};
 
 	// Create a new texture if it already is allocated.
-	if( s_pDefaultTexture )
+	if( s_pErrorTexture )
 	{
-		delete s_pDefaultTexture;
+		delete s_pErrorTexture;
 	}
-	s_pDefaultTexture = new sf::Texture;
+	s_pErrorTexture = new sf::Texture;
 
 	sf::Image image;
 	image.create( 2, 2, data );
-	//image.loadFromMemory( data, 16 );
 	
 	// Load the file from memory
-	if( s_pDefaultTexture->loadFromImage( image, sf::IntRect( 0, 0, 2, 2 ) ) == false )
+	if( s_pErrorTexture->loadFromImage( image, sf::IntRect( 0, 0, 2, 2 ) ) == false )
 	{
 		std::cout << "[ResourceManager::Initialize] Can not load the default texture." << std::endl;
-		delete s_pDefaultTexture;
+		delete s_pErrorTexture;
 		return false;
 	}
 
+	// Succeeded.
 	return true;
 }
 
 void ResourceManager::Unload( )
 {
-	if( s_pDefaultTexture )
+	if( s_pErrorTexture )
 	{
-		delete s_pDefaultTexture;
-		s_pDefaultTexture = NULL;
+		delete s_pErrorTexture;
+		s_pErrorTexture = NULL;
 	}
 }
 

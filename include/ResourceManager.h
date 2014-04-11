@@ -11,6 +11,7 @@ public:
 
 	// Public functions
 	static sf::Texture & GetTexture(const std::string &filename);
+	static sf::Texture & GetErrorTexture( );
 	static bool Initialize( );
 	static void Unload( );
 	static void ClearAllTextures( );
@@ -24,7 +25,7 @@ private:
 
 	// Private variable members
 	static TextureMap s_Textures;
-	static sf::Texture * s_pDefaultTexture;
+	static sf::Texture * s_pErrorTexture;
 
 	// Private constructors and assign operator
 	ResourceManager( );
