@@ -30,7 +30,10 @@ int GameImp::Run( int argv, char ** argc )
 		m_DeltaTimer.restart( );
 
 		// Update
-		Update( deltaTime );
+		if( Update( deltaTime ) == false )
+		{
+			break;
+		}
 
 		// Render
 		Render( );
@@ -102,7 +105,10 @@ bool GameImp::Update( float deltaTime )
 	while( m_Window.pollEvent( e ) )
 	{
 		// Send the event to the state
-		pState->HandleEvent( e );
+		if( pState->HandleEvent( e ) == false )
+		{
+			return false;
+		}
 	}
 
 	// Update the state
