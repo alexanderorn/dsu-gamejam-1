@@ -1,8 +1,9 @@
 #pragma once
 #include <Box2D/Box2D.h>
 
-#define PPM 1
+#define PPM 30
 #define DEGREES_TO_RADIANS 0.0174532925
+#define RADIANS_TO_DEGREES 57.2957795
 
 class DynamicBody
 {
@@ -24,6 +25,7 @@ public:
 
 	//set functions
 	void applyAngularImpulse(float32 impulse, bool wake);
+	void applyTorque( float32 impulse, bool wake);
 	void applyLinearImpulse(b2Vec2 impulse, b2Vec2 point, bool wake);
 	void setAngularVelocity(float32 velocity);
 	void setLinearVelocity(const b2Vec2 vector);

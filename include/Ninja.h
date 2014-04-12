@@ -3,6 +3,7 @@
 #include <DynamicBody.h>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <SFML/System/Clock.hpp>
 
 class Ninja : public Entity
 {
@@ -12,12 +13,21 @@ public:
 
 	virtual void update( );
 	virtual void draw( sf::RenderTarget& target );
-	void setPosition(float32 x, float32 y);
+	
+	DynamicBody* getBody();
 
 private:
+	// helpfunctions
+	void keepUpright( );
+	void speedlimit( );
+	
 	//ninja stuff
-	DynamicBody m_Body;
+	DynamicBody m_Legs;
 	sf::Sprite m_Sprite;
+	int m_MaxSpeed;
 
+	bool m_Jumping;
+	sf::Clock m_JumpClock;
+	int m_JumpCooldown;
 
 };

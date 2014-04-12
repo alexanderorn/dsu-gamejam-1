@@ -67,6 +67,12 @@ void DynamicBody::applyAngularImpulse(float32 impulse, bool wake)
 	mBody->ApplyAngularImpulse( impulse , wake );
 }
 
+void DynamicBody::applyTorque(float32 impulse, bool wake)
+{
+	mBody->ApplyTorque( impulse, wake );
+}
+
+
 void DynamicBody::applyLinearImpulse(b2Vec2 impulse , b2Vec2 point , bool wake)
 {
 	mBody->ApplyLinearImpulse( impulse , point , wake);
@@ -85,12 +91,12 @@ void DynamicBody::setLinearVelocity( const b2Vec2 vector )
 
 void DynamicBody::setRotation(float32 angle)
 {
-	mBody->SetTransform( mBody->GetPosition() , DEGREES_TO_RADIANS * angle );
+	mBody->SetTransform( mBody->GetPosition( ) , DEGREES_TO_RADIANS * angle );
 }
 
 void DynamicBody::setPosition(b2Vec2 pos)
 {
-	mBody->SetTransform( pos, mBody->GetAngle() );
+	mBody->SetTransform( pos, mBody->GetAngle( ) );
 }
 
 void DynamicBody::initBody(b2World& world)
@@ -104,10 +110,10 @@ void DynamicBody::initBody(b2World& world)
 		mBodyDef.type = b2_dynamicBody;
 	}
 
-	mBodyDef.position.Set( m_SpawnPointX/PPM , m_SpawnPointY/PPM );
+	mBodyDef.position.Set( m_SpawnPointX , m_SpawnPointY );
 
 	b2PolygonShape * pPolygoneShape = new b2PolygonShape;
-	pPolygoneShape->SetAsBox(m_Width/PPM, m_Height/PPM,b2Vec2( (m_Width/2)/PPM , (m_Height/2)/PPM), m_SpawnAngle);
+	pPolygoneShape->SetAsBox( (m_Width/2), (m_Height/2), b2Vec2( m_Width/2, m_Height/2), m_SpawnAngle * RADIANS_TO_DEGREES );
 	mBodyFix.shape = pPolygoneShape;
 	mBodyFix.density = m_Density;
 	mBodyFix.restitution = m_Restitution;
