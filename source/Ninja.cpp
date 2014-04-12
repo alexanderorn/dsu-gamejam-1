@@ -6,6 +6,7 @@
 
 Ninja::Ninja(b2World& world, std::vector<ThrowingStar*>& vector) :
 	m_Legs( world, 0.0f/PPM, 0.0f/PPM, 0, 1.f, 0, 0.8f, 1, false, 32.0f/PPM, 32.0f/PPM, true, -2 ),
+	m_Contacting(false),
 	m_World(world),
 	m_JumpCooldown(0.8f),
 	m_ThrowCooldown(1.f),
@@ -14,6 +15,7 @@ Ninja::Ninja(b2World& world, std::vector<ThrowingStar*>& vector) :
 	m_ThrowingStars(vector)
 {
 	m_Sprite.setTexture(ResourceManager::GetTexture("data/textures/ninja.png"));
+	m_Legs.getBody()->SetUserData(this);
 }
 
 Ninja::~Ninja( )
@@ -26,6 +28,16 @@ Ninja::~Ninja( )
 
 void Ninja::update( )
 {
+
+	if( m_Contacting )
+	{
+		std::cout << "contacting" << std::endl;
+	} else
+	{
+		std::cout << "not contacting" << std::endl;
+	}
+
+
 
 	if( !m_Dead )
 	{
@@ -58,6 +70,15 @@ Entity::e_Type Ninja::getType()
 	return Entity::PLAYER;
 }
 
+void Ninja::beginContact()
+{
+	m_Contacting = true;
+}
+
+void Ninja::endContact()
+{
+	m_Contacting = false;
+}
 
 DynamicBody* Ninja::getBody()
 {

@@ -14,8 +14,11 @@ public:
 	virtual void draw( sf::RenderTarget& target );
 	virtual void update ( );
 	virtual e_Type getType();
+	virtual void beginContact();
+	virtual void endContact();
 
 private:
 	DynamicBody m_Body;
 	sf::RectangleShape m_Shape;
+	bool m_Contacting;
 };

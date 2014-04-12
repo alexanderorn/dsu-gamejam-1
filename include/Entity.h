@@ -18,6 +18,9 @@ public:
 	virtual void update( ) = 0;
 	virtual void draw(sf::RenderTarget& target ) = 0;
 	virtual e_Type getType() = 0;
+	virtual void beginContact() = 0;
+	virtual void endContact() = 0;
+
 
 	
 

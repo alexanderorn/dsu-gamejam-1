@@ -20,7 +20,13 @@ public:
 	virtual e_Type getType();
 	DynamicBody* getBody();
 
+	virtual void beginContact();
+	virtual void endContact();
+
 private:
+	//contactstuff
+	bool m_Contacting;
+
 
 	b2World& m_World;
 

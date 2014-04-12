@@ -12,6 +12,7 @@ Level::Level( const std::string & filename ) :
 
 {
 	loadFromFile( filename );
+	m_World.SetContactListener(&m_ContactListener);
 }
 
 Level::~Level( )

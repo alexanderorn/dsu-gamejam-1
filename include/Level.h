@@ -5,6 +5,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <ThrowingStar.h>
+#include <ContactListener.h>
 
 class Platform;
 
@@ -33,6 +34,7 @@ private:
 	Ninja* m_pNinja;
 	typedef std::vector<Platform *> PlatformVector;
 	PlatformVector m_Platforms;
+	ContactListener m_ContactListener;
 
 	typedef std::vector<ThrowingStar *> StarVector;
 	StarVector m_Throwingstars;
