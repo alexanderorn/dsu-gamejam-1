@@ -13,7 +13,7 @@ PlayState::PlayState( Game * pGame, std::string & levelPath ) :
 		m_Loaded = true;
 	}
 
-	m_pLevel = new Level( );
+	m_pLevel = new Level( levelPath );
 }
 
 PlayState::~PlayState( )
