@@ -27,11 +27,15 @@ private:
 	// helpfunctions
 	void keepUpright( );
 	void speedlimit( );
+	void jump( );
+	void shoot( );
+	void updateMovement( );
 	
 	//ninja stuff
 	DynamicBody m_Legs;
 	sf::Sprite m_Sprite;
 	int m_MaxSpeed;
+	bool m_Dead;
 
 	bool m_Jumping;
 	sf::Clock m_JumpClock;

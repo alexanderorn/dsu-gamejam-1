@@ -10,6 +10,7 @@ Ninja::Ninja(b2World& world, std::vector<ThrowingStar*>& vector) :
 	m_JumpCooldown(1),
 	m_ThrowCooldown(1),
 	m_MaxSpeed(50),
+	m_Dead(false),
 	m_ThrowingStars(vector)
 {
 	m_Sprite.setTexture(ResourceManager::GetTexture("data/textures/ninja.png"));
@@ -22,34 +23,15 @@ Ninja::~Ninja( )
 
 void Ninja::update( )
 {
-	keepUpright( );
-	speedlimit( );
-
-	if( sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+	if( !m_Dead )
 	{
-		m_Legs.applyLinearImpulse(b2Vec2( 200.0f , 0 ), m_Legs.getWorldCenter(), true);
+		keepUpright( );
+		updateMovement( );
+		speedlimit( );
+		shoot( );
+	
 	}
-	if( sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-	{
-		m_Legs.applyLinearImpulse(b2Vec2( -200.0f , 0 ), m_Legs.getWorldCenter(), true);
-	}
-	//jump
-	if( sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) && !m_Jumping )
-	{
-		m_Jumping = true;
-		m_JumpClock.restart();
-		m_Legs.applyLinearImpulse(b2Vec2( 0 , -120000.0f ), m_Legs.getWorldCenter(), true);
-	}
-
-	//Throw
-	if( sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && !m_Shot)
-	{
-		m_Shot = true;
-		m_ThrowClock.restart();
-		m_ThrowingStars.push_back( new ThrowingStar(m_World, m_Legs.getPosition().x, m_Legs.getPosition().y, b2Vec2(1,1), 300000));
-	}
-
-
+	
 	//reset cooldowns;
 	if( m_JumpClock.getElapsedTime().asSeconds() > m_JumpCooldown )
 	{
@@ -85,6 +67,15 @@ void Ninja::keepUpright( )
 		m_Legs.applyTorque( 1000000 , true );
 	}
 
+	//die
+	if( m_Legs.getAngle( ) * RADIANS_TO_DEGREES > 45 )
+	{
+		m_Dead = true;
+	}
+	if( m_Legs.getAngle( ) * RADIANS_TO_DEGREES < -45 )
+	{
+		m_Dead = true;
+	}
 }
 
 void Ninja::speedlimit( )
@@ -111,4 +102,37 @@ void Ninja::speedlimit( )
 		}
 }
 
+void Ninja::jump( )
+{
+	m_Jumping = true;
+	m_JumpClock.restart();
+	m_Legs.applyLinearImpulse(b2Vec2( 0 , -120000.0f ), m_Legs.getWorldCenter(), true);
+}
 
+void Ninja::shoot( )
+{
+	if( sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && !m_Shot)
+	{
+		m_Shot = true;
+		m_ThrowClock.restart();
+		m_ThrowingStars.push_back( new ThrowingStar(m_World, m_Legs.getPosition().x, m_Legs.getPosition().y, b2Vec2(1,1), 300000));
+	}
+}
+
+void Ninja::updateMovement( )
+{
+	if( sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+	{
+		m_Legs.applyLinearImpulse(b2Vec2( 200.0f , 0 ), m_Legs.getWorldCenter(), true);
+	}
+	if( sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+	{
+		m_Legs.applyLinearImpulse(b2Vec2( -200.0f , 0 ), m_Legs.getWorldCenter(), true);
+	}
+	
+
+	if( sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) && !m_Jumping )
+	{
+		jump( );
+	}
+}
