@@ -18,7 +18,7 @@ public:
 	~MenuState( );
 
 	// Public functions
-	virtual bool Update( );
+	virtual bool Update( float deltaTime );
 	virtual void Render( );
 	virtual bool Enter( );
 	virtual void Leave( );

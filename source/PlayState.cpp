@@ -27,16 +27,16 @@ PlayState::~PlayState( )
 }
 
 // Public functions
-bool PlayState::Update( )
+bool PlayState::Update( float deltaTime )
 {
-	m_pLevel->update( 0.01666f );
+	m_pLevel->update( deltaTime );
 	return true;
 }
 
 void PlayState::Render( )
 {
 	// Clear the window
-	m_pGame->GetWindow( ).clear( sf::Color( 255, 255, 255, 255 ) );
+	m_pGame->GetWindow( ).clear( sf::Color( 242, 39, 39, 255 ) );
 
 	// Render the level
 	m_pLevel->draw( m_pGame->GetWindow( ) );

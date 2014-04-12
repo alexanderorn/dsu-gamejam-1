@@ -57,13 +57,14 @@ bool GameImp::Load( )
 	const sf::Uint32 style =	sf::Style::Close |
 								sf::Style::Fullscreen;
 
+	
 	m_Window.create( videoMode, "Ninja game", style );
 	if( m_Window.isOpen( ) == false )
 	{
 		std::cout << "[GameImp::Load] Can not create the window" << std::endl;
 		return false;
 	}
-
+	//m_Window.setFramerateLimit(60);
 	// Initialize the resource manager
 	if( ResourceManager::Initialize( ) == false )
 	{
@@ -112,7 +113,7 @@ bool GameImp::Update( float deltaTime )
 	}
 
 	// Update the state
-	if( pState->Update( ) == false )
+	if( pState->Update( deltaTime ) == false )
 	{
 		return false;
 	}

@@ -23,9 +23,12 @@ MenuState::MenuState( Game * pGame ) :
 		m_Loaded = true;
 	}
 
+	// Alpha color
+	sf::Uint8 alpha = 180;
+
 	// Load the header text
 	m_HeaderText.setFont( ResourceManager::GetFont( "data/fonts/visitor1.ttf" ) );
-	m_HeaderText.setColor( sf::Color( 255, 255, 255, 220 ) );
+	m_HeaderText.setColor( sf::Color( 255, 255, 255, alpha ) );
 	m_HeaderText.setCharacterSize( 30 );
 	m_HeaderText.setScale( 5, 5 );
 	m_HeaderText.setString( "Levels" );
@@ -35,7 +38,7 @@ MenuState::MenuState( Game * pGame ) :
 
 	// Load the button text
 	m_ButtonText.setFont( ResourceManager::GetFont( "data/fonts/visitor1.ttf" ) );
-	m_ButtonText.setColor( sf::Color( 255, 255, 255, 220 ) );
+	m_ButtonText.setColor( sf::Color( 255, 255, 255, alpha ) );
 	m_ButtonText.setCharacterSize( 30 );
 	m_ButtonText.setScale( 3, 3 );
 	m_ButtonText.setPosition( 260, 10 );
@@ -45,6 +48,7 @@ MenuState::MenuState( Game * pGame ) :
 	// Set the button frame texture
 	m_ButtonFrameSprite.setTexture( ResourceManager::GetTexture( "data/textures/menuButtonFrame.png" ) );
 	const_cast<sf::Texture*>( m_ButtonFrameSprite.getTexture( ) )->setSmooth( false );
+	m_ButtonFrameSprite.setColor( sf::Color( 255, 255, 255, alpha ) );
 	m_ButtonFrameSprite.setScale( 9, 9 );
 
 	// Get the button real size
@@ -81,7 +85,7 @@ MenuState::~MenuState( )
 }
 
 // Public functions
-bool MenuState::Update( )
+bool MenuState::Update( float deltaTime )
 {
 	return true;
 }

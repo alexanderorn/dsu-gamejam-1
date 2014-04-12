@@ -7,7 +7,7 @@ Platform::Platform( b2World& world, int width, int height, float x, float y ):
 {
 	m_Shape.setSize(sf::Vector2f( (float)width, (float)height) );
 	m_Shape.setPosition( x, y );
-	m_Shape.setFillColor( sf::Color( 242, 39, 39, 255 ) );
+	m_Shape.setFillColor( sf::Color( 255, 255, 255, 180 ) );
 }
 
 Platform::~Platform( )

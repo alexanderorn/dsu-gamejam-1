@@ -21,7 +21,7 @@ Level::~Level( )
 
 void Level::update(float delta)
 {
-	m_World.Step( 1.0f / 200.0f, 8, 3 );
+	m_World.Step( delta*3 , 8, 3 );
 	m_pNinja->update();
 }
 
