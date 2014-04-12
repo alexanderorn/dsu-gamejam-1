@@ -21,7 +21,8 @@ Level::~Level( )
 
 void Level::update(float delta)
 {
-	m_World.Step( delta*3 , 8, 3 );
+
+	m_World.Step( delta * 3.0f, 8, 3 );
 	m_pNinja->update();
 }
 
@@ -62,7 +63,7 @@ bool Level::loadFromFile( const std::string & filename )
 {
 	// Load the ninja
 	m_pNinja = new Ninja( m_World, m_Throwingstars);
-	m_pNinja->getBody()->setPosition(b2Vec2( 100 , 100));
+	m_pNinja->getBody()->setPosition(b2Vec2( 100/PPM , 100/PPM));
 
 	// Open the file
 	std::ifstream fin( filename.c_str( ) );

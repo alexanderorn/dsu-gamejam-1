@@ -3,7 +3,7 @@
 #include <MemoryLeak.h>
 
 Platform::Platform( b2World& world, int width, int height, float x, float y ):
-	m_Body(world, x, y, 0, 3, 0, 1, 0, true, (float32)width, (float32)height, false)
+	m_Body(world, x/PPM , y/PPM, 0, 3, 0, 1.1f, 0, true, (float32)width/PPM, (float32)height/PPM, true)
 {
 	m_Shape.setSize(sf::Vector2f( (float)width, (float)height) );
 	m_Shape.setPosition( x, y );
