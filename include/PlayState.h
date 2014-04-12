@@ -1,5 +1,6 @@
 #pragma once
 #include <State.h>
+#include <Level.h>
 #include <string>
 
 // Forward declaraction
@@ -28,5 +29,6 @@ private:
 
 	bool m_Loaded;
 	Game * m_pGame;
+	Level * m_pLevel;
 
 };

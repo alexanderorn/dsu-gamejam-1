@@ -18,16 +18,21 @@ void Ninja::update( )
 {
 	if( sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
-		m_Body.applyLinearImpulse(b2Vec2( 20 , 0 ), m_Body.getWorldCenter(), true);
+		m_Body.applyLinearImpulse(b2Vec2( 400 , 0 ), m_Body.getWorldCenter(), true);
 	}
 	if( sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 	{
-		m_Body.applyLinearImpulse(b2Vec2( -20 , 0 ), m_Body.getWorldCenter(), true);
+		m_Body.applyLinearImpulse(b2Vec2( -400 , 0 ), m_Body.getWorldCenter(), true);
 	}
+
+	m_Sprite.setPosition( m_Body.getPosition( ).x / 30, m_Body.getPosition( ).y / 30 );
+	m_Sprite.setRotation( m_Body.getAngle( ) );
+	
 }
 
 void Ninja::draw( sf::RenderTarget& target )
 {
+	//m_Sprite.setPosition( 100, 100 );
 	target.draw(m_Sprite);
 }
 

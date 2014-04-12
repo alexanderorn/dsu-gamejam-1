@@ -3,11 +3,12 @@
 #include <Ninja.h>
 #include <DynamicBody.h>
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 
 class Level
 {
 public:
-	Level( Ninja* ninja );
+	Level( );
 	~Level( );
 	
 	void update( float delta );
@@ -20,8 +21,8 @@ private:
 
 	b2World m_World;
 	Ninja* m_pNinja;
-
 	DynamicBody m_Platform;
+	sf::RectangleShape m_PlatformShape;
 
 
 };

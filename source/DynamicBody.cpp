@@ -98,7 +98,8 @@ void DynamicBody::initBody(b2World& world)
 	if( m_Static )
 	{
 		mBodyDef.type = b2_staticBody;
-	} else
+	}
+	else
 	{
 		mBodyDef.type = b2_dynamicBody;
 	}

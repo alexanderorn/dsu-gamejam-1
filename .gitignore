@@ -1,8 +1,8 @@
 # Directories #
 Obj
 /obj
-/Bin
-/bin
+/bin/*
+!/bin/data
 
 # Compiled #
 *.obj

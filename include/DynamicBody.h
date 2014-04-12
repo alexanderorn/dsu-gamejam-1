@@ -1,7 +1,7 @@
 #pragma once
 #include <Box2D/Box2D.h>
 
-#define PPM 30
+#define PPM 1
 #define DEGREES_TO_RADIANS 0.0174532925
 
 class DynamicBody
