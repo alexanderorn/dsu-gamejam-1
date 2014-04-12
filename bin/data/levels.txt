@@ -1,0 +1,10 @@
+{
+	"Levels":
+	[
+		"data/levels/level1.txt",
+		"data/levels/level2.txt",
+		"data/levels/level3.txt",
+		"data/levels/level4.txt",
+		"data/levels/level5.txt"
+	]
+}

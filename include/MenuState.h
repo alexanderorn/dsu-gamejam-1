@@ -46,6 +46,10 @@ private:
 		sf::Vector2f Position;
 	};
 
+	// Private functions
+	bool ReadLevelFile( const std::string & filename );
+	bool ReadSaveFile( const std::string & filename );
+
 	// Private variables
 	bool m_Loaded;
 	Game * m_pGame;
@@ -53,5 +57,6 @@ private:
 	sf::Text m_ButtonText;
 	sf::Sprite m_ButtonFrameSprite;
 	std::vector<Button> m_Buttons;
+	unsigned int m_FinishedLevels;
 
 };

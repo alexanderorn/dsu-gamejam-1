@@ -32,6 +32,7 @@ DynamicBody::DynamicBody(b2World& world,
 DynamicBody::~DynamicBody()
 {
 	mBody->GetWorld()->DestroyBody(mBody);
+
 }
 
 const b2Vec2 DynamicBody::getLinearVelocity()
@@ -132,4 +133,7 @@ void DynamicBody::initBody(b2World& world)
 	mBody = world.CreateBody(&mBodyDef);
 	mBody->CreateFixture(&mBodyFix);
 	mBody->SetAngularDamping(m_AngularDamping);
+
+	// Delete the polygon shape, since it's not required anymore.
+	delete pPolygoneShape;
 }
