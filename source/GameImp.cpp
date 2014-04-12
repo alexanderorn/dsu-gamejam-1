@@ -52,18 +52,17 @@ sf::RenderWindow & GameImp::GetWindow( )
 bool GameImp::Load( )
 {
 	// Create the game window
-	const sf::Vector2i windowSize( 800, 600 );
+	const sf::Vector2i windowSize( 1920, 1080 );
 	const sf::VideoMode videoMode( windowSize.x, windowSize.y );
 	const sf::Uint32 style =	sf::Style::Close |
-								sf::Style::Titlebar;
+								sf::Style::Fullscreen;
 
-	m_Window.create( videoMode, style );
+	m_Window.create( videoMode, "Ninja game", style );
 	if( m_Window.isOpen( ) == false )
 	{
 		std::cout << "[GameImp::Load] Can not create the window" << std::endl;
 		return false;
 	}
-	m_Window.setTitle( "Ninja game" );
 
 	// Initialize the resource manager
 	if( ResourceManager::Initialize( ) == false )

@@ -1,4 +1,5 @@
 #include <PlayState.h>
+#include <StateManager.h>
 #include <Game.h>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <MemoryLeak.h>
@@ -35,7 +36,7 @@ bool PlayState::Update( )
 void PlayState::Render( )
 {
 	// Clear the window
-	m_pGame->GetWindow( ).clear( sf::Color( 255, 0, 255, 255 ) );
+	m_pGame->GetWindow( ).clear( sf::Color( 255, 255, 255, 255 ) );
 
 	// Render the level
 	m_pLevel->draw( m_pGame->GetWindow( ) );
@@ -62,7 +63,8 @@ bool PlayState::HandleEvent( const sf::Event & p_Event )
 		{
 			if( p_Event.key.code == sf::Keyboard::Escape )
 			{
-				return false;
+				GetStateManager( )->Pop( );
+				return true;
 			}
 		}
 		break;
