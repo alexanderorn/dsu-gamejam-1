@@ -1,5 +1,6 @@
 #include <Platform.h>
 #include <SFML/System/Vector2.hpp>
+#include <iostream>
 #include <MemoryLeak.h>
 
 Platform::Platform( b2World& world, int width, int height, float x, float y ):

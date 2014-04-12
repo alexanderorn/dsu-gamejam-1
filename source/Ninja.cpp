@@ -31,10 +31,10 @@ void Ninja::update( )
 
 	if( m_Contacting )
 	{
-		std::cout << "contacting" << std::endl;
+		std::cout << "KORV" << std::endl;
 	} else
 	{
-		std::cout << "not contacting" << std::endl;
+		std::cout << "not FISK" << std::endl;
 	}
 
 

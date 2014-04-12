@@ -22,7 +22,6 @@ public:
 
 	virtual void beginContact();
 	virtual void endContact();
-
 private:
 	//contactstuff
 	bool m_Contacting;

@@ -3,8 +3,7 @@
 
 class ContactListener : public b2ContactListener
 {
-   virtual void BeginContact(b2Contact* contact);
-   virtual void EndContact(b2Contact* contact);
-
+	virtual void BeginContact(b2Contact* contact);
+	virtual void EndContact(b2Contact* contact);
 
 };

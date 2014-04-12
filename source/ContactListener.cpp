@@ -1,38 +1,38 @@
 #include <ContactListener.h>
-#include <MemoryLeak.h>
+#include <iostream>
 #include <Entity.h>
+#include <Ninja.h>
+#include <Platform.h>
+#include <MemoryLeak.h>
 
 void ContactListener::BeginContact(b2Contact* contact)
 {
-	//checks if body A is an Entity
+
 	void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
-	if( bodyUserData )
+	if ( bodyUserData )
 	{
 		static_cast<Entity*>( bodyUserData )->beginContact();
 	}
 
-	//checks if body B is an Entity
 	bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
-	if( bodyUserData )
+	if ( bodyUserData )
 	{
 		static_cast<Entity*>( bodyUserData )->beginContact();
 	}
-
 }
 
 void ContactListener::EndContact(b2Contact* contact)
 {
-	//checks if body A is an Entity
 	void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
-	if( bodyUserData )
+	if ( bodyUserData )
 	{
 		static_cast<Entity*>( bodyUserData )->endContact();
 	}
 
-	//checks if body B is an Entity
 	bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
-	if( bodyUserData )
+	if ( bodyUserData )
 	{
 		static_cast<Entity*>( bodyUserData )->endContact();
 	}
 }
+
