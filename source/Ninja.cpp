@@ -1,10 +1,11 @@
 #include <Ninja.h>
 #include <ResourceManager.h>
 #include <iostream>
+#include <MemoryLeak.h>
 
 
 Ninja::Ninja(b2World& world) :
-	m_Legs( world, 0.0f, 0.0f, 0, 3, 0, 1, 1, false, 32, 32),
+	m_Legs( world, 0.0f, 0.0f, 0, 3, 0, 1, 1, false, 32, 32, true),
 	m_JumpCooldown(1),
 	m_MaxSpeed(50)
 {

@@ -4,6 +4,7 @@
 #include <DynamicBody.h>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <Platform.h>
 
 class Level
 {
@@ -21,8 +22,8 @@ private:
 
 	b2World m_World;
 	Ninja* m_pNinja;
-	DynamicBody m_Platform;
-	sf::RectangleShape m_PlatformShape;
+	Platform test;
+
 
 
 };

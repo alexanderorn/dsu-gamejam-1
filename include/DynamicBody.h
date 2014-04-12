@@ -12,7 +12,7 @@ public:
 	DynamicBody(b2World& world, float x, float y,
 		float32 angle, int density, int restitution, 
 		int friction, int angularDamping, bool isStatic,
-		float32 width, float32 height);
+		float32 width, float32 height, bool originCenter);
 	~DynamicBody();
 
 	//get functions
@@ -41,6 +41,7 @@ private:
 	int m_Restitution;
 	int m_Friction;
 	int m_AngularDamping;
+	bool m_OriginCenter;
 
 
 	DynamicBody(const DynamicBody& b2b);

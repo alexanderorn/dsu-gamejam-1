@@ -12,7 +12,8 @@ DynamicBody::DynamicBody(b2World& world,
 						 int angularDamping,
 						 bool isStatic,
 						 float32 width,
-						 float32 height)
+						 float32 height,
+						 bool originCenter)
    :m_SpawnPointX(x),
 	m_SpawnPointY(y),
 	m_SpawnAngle(angle),
@@ -22,7 +23,8 @@ DynamicBody::DynamicBody(b2World& world,
 	m_AngularDamping(angularDamping),
 	m_Static(isStatic),
 	m_Width(width),
-	m_Height(height)
+	m_Height(height),
+	m_OriginCenter(originCenter)
 {
 	initBody(world);
 }
@@ -113,6 +115,15 @@ void DynamicBody::initBody(b2World& world)
 	mBodyDef.position.Set( m_SpawnPointX , m_SpawnPointY );
 
 	b2PolygonShape * pPolygoneShape = new b2PolygonShape;
+	if( m_OriginCenter )
+	{
+		pPolygoneShape->SetAsBox( (m_Width/2), (m_Height/2), b2Vec2( m_Width/2, m_Height/2), m_SpawnAngle * RADIANS_TO_DEGREES );
+	} else
+	{
+		pPolygoneShape->SetAsBox( (m_Width/2), (m_Height/2), b2Vec2( 0, 0), m_SpawnAngle * RADIANS_TO_DEGREES );
+	}
+
+
 	pPolygoneShape->SetAsBox( (m_Width/2), (m_Height/2), b2Vec2( m_Width/2, m_Height/2), m_SpawnAngle * RADIANS_TO_DEGREES );
 	mBodyFix.shape = pPolygoneShape;
 	mBodyFix.density = m_Density;

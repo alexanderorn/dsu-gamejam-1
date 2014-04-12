@@ -4,14 +4,11 @@
 
 Level::Level( ):
 	m_World(b2Vec2( 0.f, 9.82f ) ),
-	m_Platform(m_World, 100.0f, 300.0f, 0, 3, 0, 1, 1, true, 600, 200)
+	test(m_World, 600, 200, 100, 300)
 {
 	m_pNinja = new Ninja( m_World );
 	m_pNinja->getBody()->setPosition(b2Vec2( 100 , 100));
 
-	m_PlatformShape.setPosition( m_Platform.getPosition().x , m_Platform.getPosition().y  );
-	m_PlatformShape.setSize( sf::Vector2f( 600.0f, 200) );
-	m_PlatformShape.setFillColor( sf::Color( 50, 50, 50, 255 ) );
 }
 
 Level::~Level( )
@@ -36,7 +33,7 @@ void Level::draw( sf::RenderTarget& target )
 	m_pNinja->draw( target );
 
 	// Render the platform
-	target.draw( m_PlatformShape );
+	test.draw(target);
 }
 
 void Level::load()
