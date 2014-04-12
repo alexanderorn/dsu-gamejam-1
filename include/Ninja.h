@@ -17,7 +17,7 @@ public:
 
 	virtual void update( );
 	virtual void draw( sf::RenderTarget& target );
-	
+	virtual e_Type getType();
 	DynamicBody* getBody();
 
 private:
@@ -34,12 +34,14 @@ private:
 	//ninja stuff
 	DynamicBody m_Legs;
 	sf::Sprite m_Sprite;
-	int m_MaxSpeed;
+	float m_MaxSpeed;
 	bool m_Dead;
-
 	bool m_Jumping;
 	sf::Clock m_JumpClock;
-	int m_JumpCooldown;
+	float m_JumpCooldown;
+
+	//sword
+
 
 	//throwstuff
 	sf::Clock m_ThrowClock;

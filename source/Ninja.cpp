@@ -5,11 +5,11 @@
 
 
 Ninja::Ninja(b2World& world, std::vector<ThrowingStar*>& vector) :
-	m_Legs( world, 0.0f/PPM, 0.0f/PPM, 0, 1.0f, 0, 0.6f, 1, false, 32.0f/PPM, 32.0f/PPM, true, -2 ),
+	m_Legs( world, 0.0f/PPM, 0.0f/PPM, 0, 1.f, 0, 0.8f, 1, false, 32.0f/PPM, 32.0f/PPM, true, -2 ),
 	m_World(world),
-	m_JumpCooldown(1),
-	m_ThrowCooldown(1),
-	m_MaxSpeed(8),
+	m_JumpCooldown(0.8f),
+	m_ThrowCooldown(1.f),
+	m_MaxSpeed(10),
 	m_Dead(false),
 	m_ThrowingStars(vector)
 {
@@ -52,6 +52,12 @@ void Ninja::draw( sf::RenderTarget& target )
 	m_Sprite.setRotation( m_Legs.getAngle( ) * RADIANS_TO_DEGREES );
 	target.draw(m_Sprite);
 }
+
+Entity::e_Type Ninja::getType()
+{
+	return Entity::PLAYER;
+}
+
 
 DynamicBody* Ninja::getBody()
 {
@@ -111,7 +117,7 @@ void Ninja::jump( )
 	{
 		m_Jumping = true;
 		m_JumpClock.restart();
-		m_Legs.applyLinearImpulse(b2Vec2( 0 , -15.0f ), m_Legs.getWorldCenter(), true);
+		m_Legs.applyLinearImpulse(b2Vec2( 0 , -12.0f ), m_Legs.getWorldCenter(), true);
 	}
 }
 
@@ -130,11 +136,11 @@ void Ninja::updateMovement( )
 {
 	if( sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
-		m_Legs.applyLinearImpulse(b2Vec2( 3.f , 0 ), m_Legs.getWorldCenter(), true);
+		m_Legs.applyLinearImpulse(b2Vec2( 1.f , 0 ), m_Legs.getWorldCenter(), true);
 	}
 	if( sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 	{
-		m_Legs.applyLinearImpulse(b2Vec2( -3.f , 0 ), m_Legs.getWorldCenter(), true);
+		m_Legs.applyLinearImpulse(b2Vec2( -1.f , 0 ), m_Legs.getWorldCenter(), true);
 	}
 	
 

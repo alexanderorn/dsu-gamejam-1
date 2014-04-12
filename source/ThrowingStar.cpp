@@ -27,3 +27,8 @@ void ThrowingStar::draw( sf::RenderTarget& target )
 	m_Shape.setRotation( m_Body.getAngle( ) * RADIANS_TO_DEGREES );
 	target.draw(m_Shape);
 }
+
+Entity::e_Type ThrowingStar::getType()
+{
+	return Entity::THROWINGSTAR;
+}

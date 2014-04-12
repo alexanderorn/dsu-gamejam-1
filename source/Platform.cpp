@@ -24,3 +24,8 @@ void Platform::update( )
 {
 
 }
+
+Entity::e_Type Platform::getType()
+{
+	return Entity::PLATFORM;
+}

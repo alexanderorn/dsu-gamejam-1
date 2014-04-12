@@ -82,6 +82,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\source\ContactListener.cpp" />
     <ClCompile Include="..\..\source\DynamicBody.cpp" />
     <ClCompile Include="..\..\source\Game.cpp" />
     <ClCompile Include="..\..\source\GameImp.cpp" />
@@ -97,6 +98,7 @@
     <ClCompile Include="..\..\source\ThrowingStar.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\ContactListener.h" />
     <ClInclude Include="..\..\include\DynamicBody.h" />
     <ClInclude Include="..\..\include\Entity.h" />
     <ClInclude Include="..\..\include\Game.h" />

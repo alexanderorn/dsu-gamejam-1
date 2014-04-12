@@ -13,6 +13,7 @@ public:
 
 	virtual void draw( sf::RenderTarget& target );
 	virtual void update ( );
+	virtual e_Type getType();
 
 private:
 	DynamicBody m_Body;
