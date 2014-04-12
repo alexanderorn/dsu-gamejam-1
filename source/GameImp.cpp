@@ -63,6 +63,7 @@ bool GameImp::Load( )
 		std::cout << "[GameImp::Load] Can not create the window" << std::endl;
 		return false;
 	}
+	m_Window.setFramerateLimit( 62 );
 
 	// Initialize the resource manager
 	if( ResourceManager::Initialize( ) == false )

@@ -10,8 +10,8 @@ class DynamicBody
 
 public:
 	DynamicBody(b2World& world, float x, float y,
-		float32 angle, int density, float restitution, 
-		int friction, int angularDamping, bool isStatic,
+		float32 angle, float density, float restitution, 
+		float friction, float angularDamping, bool isStatic,
 		float32 width, float32 height, bool originCenter,
 		int layer = 0 );
 	~DynamicBody();
@@ -37,11 +37,11 @@ private:
 	float m_Width;
 	float m_Height;
 	bool m_Static;
-	int m_SpawnAngle;
-	int m_Density;
+	float m_SpawnAngle;
+	float m_Density;
 	float m_Restitution;
-	int m_Friction;
-	int m_AngularDamping;
+	float m_Friction;
+	float m_AngularDamping;
 	bool m_OriginCenter;
 
 

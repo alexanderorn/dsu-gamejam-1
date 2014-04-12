@@ -6,10 +6,10 @@ DynamicBody::DynamicBody(b2World& world,
 						 float x, 
 						 float y,
 						 float32 angle,
-						 int density,
+						 float density,
 						 float restitution,
-						 int friction,
-						 int angularDamping,
+						 float friction,
+						 float angularDamping,
 						 bool isStatic,
 						 float32 width,
 						 float32 height,
@@ -126,7 +126,7 @@ void DynamicBody::initBody(b2World& world, int layer)
 	}
 
 
-	pPolygoneShape->SetAsBox( (m_Width/2), (m_Height/2), b2Vec2( m_Width/2, m_Height/2), m_SpawnAngle * RADIANS_TO_DEGREES );
+	//pPolygoneShape->SetAsBox( (m_Width/2), (m_Height/2), b2Vec2( m_Width/2, m_Height/2), m_SpawnAngle * RADIANS_TO_DEGREES );
 	mBodyFix.shape = pPolygoneShape;
 	mBodyFix.density = m_Density;
 	mBodyFix.restitution = m_Restitution;
