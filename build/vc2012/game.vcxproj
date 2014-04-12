@@ -85,14 +85,18 @@
     <ClCompile Include="..\..\source\DynamicBody.cpp" />
     <ClCompile Include="..\..\source\Game.cpp" />
     <ClCompile Include="..\..\source\GameImp.cpp" />
+    <ClCompile Include="..\..\source\Level.cpp" />
     <ClCompile Include="..\..\source\Main.cpp" />
+    <ClCompile Include="..\..\source\Ninja.cpp" />
     <ClCompile Include="..\..\source\ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\DynamicBody.h" />
     <ClInclude Include="..\..\include\Entity.h" />
     <ClInclude Include="..\..\include\Game.h" />
+    <ClInclude Include="..\..\include\Level.h" />
     <ClInclude Include="..\..\include\MemoryLeak.h" />
+    <ClInclude Include="..\..\include\Ninja.h" />
     <ClInclude Include="..\..\include\ResourceManager.h" />
     <ClInclude Include="..\..\include\GameImp.h" />
   </ItemGroup>

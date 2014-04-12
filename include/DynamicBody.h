@@ -7,9 +7,11 @@
 class DynamicBody
 {
 
-private:
+public:
 	DynamicBody(b2World& world, float x, float y,
-		int angle, int density, int restitution, int friction, int angularDamping);
+		float32 angle, int density, int restitution, 
+		int friction, int angularDamping, bool isStatic,
+		float32 width, float32 height);
 	~DynamicBody();
 
 	//get functions
@@ -26,8 +28,12 @@ private:
 	void setAngularVelocity(float32 velocity);
 	void setLinearVelocity(const b2Vec2 vector);
 	void setRotation(float32 angle);
+	void setPosition(b2Vec2);
 
 private:
+	float m_Width;
+	float m_Height;
+	bool m_Static;
 	int m_SpawnAngle;
 	int m_Density;
 	int m_Restitution;

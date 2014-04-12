@@ -24,6 +24,7 @@ int GameImp::Run( int argv, char ** argc )
 	m_DeltaTimer.restart( );
 	while( m_Window.isOpen( ) )
 	{
+
 		// Get the delta time
 		float deltaTime = m_DeltaTimer.getElapsedTime( ).asSeconds( );
 		m_DeltaTimer.restart( );

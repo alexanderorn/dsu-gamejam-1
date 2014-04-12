@@ -5,18 +5,24 @@
 DynamicBody::DynamicBody(b2World& world, 
 						 float x, 
 						 float y,
-						 int angle,
+						 float32 angle,
 						 int density,
 						 int restitution,
 						 int friction,
-						 int angularDamping)
+						 int angularDamping,
+						 bool isStatic,
+						 float32 width,
+						 float32 height)
    :m_SpawnPointX(x),
 	m_SpawnPointY(y),
 	m_SpawnAngle(angle),
 	m_Density(density),
 	m_Restitution(restitution),
 	m_Friction(friction),
-	m_AngularDamping(angularDamping)
+	m_AngularDamping(angularDamping),
+	m_Static(isStatic),
+	m_Width(width),
+	m_Height(height)
 {
 	initBody(world);
 }
@@ -56,7 +62,6 @@ b2Body* DynamicBody::getBody()
 	return mBody;
 }
 
-
 void DynamicBody::applyAngularImpulse(float32 impulse, bool wake)
 {
 	mBody->ApplyAngularImpulse( impulse , wake );
@@ -83,13 +88,26 @@ void DynamicBody::setRotation(float32 angle)
 	mBody->SetTransform( mBody->GetPosition() , DEGREES_TO_RADIANS * angle );
 }
 
+void DynamicBody::setPosition(b2Vec2 pos)
+{
+	mBody->SetTransform( pos, mBody->GetAngle() );
+}
+
 void DynamicBody::initBody(b2World& world)
 {
+	if( m_Static )
+	{
+		mBodyDef.type = b2_staticBody;
+	} else
+	{
+		mBodyDef.type = b2_dynamicBody;
+	}
 
-	mBodyDef.type = b2_dynamicBody;
 	mBodyDef.position.Set( m_SpawnPointX/PPM , m_SpawnPointY/PPM );
-	mBodyDef.angle = m_SpawnAngle;
-	
+
+	b2PolygonShape * pPolygoneShape = new b2PolygonShape;
+	pPolygoneShape->SetAsBox(m_Width/PPM, m_Height/PPM,b2Vec2( (m_Width/2)/PPM , (m_Height/2)/PPM), m_SpawnAngle);
+	mBodyFix.shape = pPolygoneShape;
 	mBodyFix.density = m_Density;
 	mBodyFix.restitution = m_Restitution;
 	mBodyFix.friction = m_Friction;
