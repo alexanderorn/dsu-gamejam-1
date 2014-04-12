@@ -5,6 +5,8 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 
+class Platform;
+
 class Level
 {
 public:
@@ -28,8 +30,10 @@ private:
 	bool m_Loaded;
 	b2World m_World;
 	Ninja* m_pNinja;
-	DynamicBody m_Platform;
-	sf::RectangleShape m_PlatformShape;
+	typedef std::vector<Platform *> PlatformVector;
+	PlatformVector m_Platforms;
+	//Platform test;
+
 
 
 };

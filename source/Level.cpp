@@ -1,4 +1,5 @@
 #include <Level.h>
+#include <Platform.h>
 #include <Json/reader.h>
 #include <Json/value.h>
 #include <fstream>
@@ -7,8 +8,8 @@
 
 Level::Level( const std::string & filename ) :
 	m_Loaded( false ),
-	m_World(b2Vec2( 0.f, 9.82f ) ),
-	m_Platform(m_World, 100.0f, 300.0f, 0, 3, 0, 1, 1, true, 600, 200)
+	m_World(b2Vec2( 0.f, 9.82f ) )/*,
+	test(m_World, 600, 200, 100, 300)*/
 {
 	loadFromFile( filename );
 }
@@ -30,7 +31,11 @@ void Level::draw( sf::RenderTarget& target )
 	m_pNinja->draw( target );
 
 	// Render the platform
-	target.draw( m_PlatformShape );
+	for( int i = 0; i < m_Platforms.size( ); i++ )
+	{
+		m_Platforms[ i ]->draw( target );
+	}
+	//test.draw(target);
 }
 void Level::unload()
 {
@@ -39,6 +44,13 @@ void Level::unload()
 		delete m_pNinja;
 		m_pNinja = NULL;
 	}
+
+	// Delete the platforms
+	for( int i = 0; i < m_Platforms.size( ); i++ )
+	{
+		delete m_Platforms[ i ];
+	}
+	m_Platforms.clear( );
 }
 
 bool Level::loadFromFile( const std::string & filename )
@@ -46,14 +58,6 @@ bool Level::loadFromFile( const std::string & filename )
 	// Load the ninja
 	m_pNinja = new Ninja( m_World );
 	m_pNinja->getBody()->setPosition(b2Vec2( 100 , 100));
-
-	// Add default platform
-	m_PlatformShape.setPosition( m_Platform.getPosition().x , m_Platform.getPosition().y  );
-	m_PlatformShape.setSize( sf::Vector2f( 600.0f, 200) );
-	m_PlatformShape.setFillColor( sf::Color( 50, 50, 50, 255 ) );
-	
-
-
 
 	// Open the file
 	std::ifstream fin( filename.c_str( ) );
@@ -82,6 +86,50 @@ bool Level::loadFromFile( const std::string & filename )
 	{
 		std::cout << "[Level::loadFromFile] Failed to parse level file." << std::endl;
 		return false;
+	}
+
+	// Get the platforms
+	Json::Value jsonPlatforms = jsonRoot[ "Platforms" ];
+	if( jsonPlatforms.isArray( ) == false )
+	{
+		std::cout << "[Level::loadFromFile] Platforms are not an array." << std::endl;
+		return false;
+	}
+
+	// Go thrugh the platforms
+	for( int i = 0; i < jsonPlatforms.size( ); i++ )
+	{
+		// Get the current platform
+		Json::Value jsonCurrentPlatform = jsonPlatforms[ i ];
+
+		// Get the position
+		Json::Value jsonPosition = jsonCurrentPlatform[ "Position" ];
+		if( jsonPosition.isObject( ) == false )
+		{
+			std::cout << "[Level::loadFromFile] Platform position is not a object." << std::endl;
+			return false;
+		}
+
+		// Get the size
+		Json::Value jsonSize = jsonCurrentPlatform[ "Size" ];
+		if( jsonSize.isObject( ) == false )
+		{
+			std::cout << "[Level::loadFromFile] Platform size is not a object." << std::endl;
+			return false;
+		}
+
+		// Get the position and size from the json values.
+		sf::Vector2i position;
+		sf::Vector2i size;
+
+		position.x = jsonPosition.get( "X", 0 ).asInt( );
+		position.y = jsonPosition.get( "Y", 0 ).asInt( );
+		size.x = jsonSize.get( "X", 0 ).asInt( );
+		size.y = jsonSize.get( "Y", 0 ).asInt( );
+
+		// Append the platform
+		m_Platforms.push_back( new Platform( m_World, size.x, size.y, position.x, position.y ) );
+
 	}
 
 	// Succeeded
