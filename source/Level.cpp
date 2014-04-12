@@ -1,7 +1,6 @@
 #include <Level.h>
 #include <MemoryLeak.h>
 
-
 Level::Level( ):
 	m_World(b2Vec2( 0.f, 9.82f ) ),
 	test(m_World, 600, 200, 100, 300)
