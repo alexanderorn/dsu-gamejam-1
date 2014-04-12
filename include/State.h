@@ -18,7 +18,7 @@ public:
 	virtual ~State( );
 
 	// Public functions
-	virtual bool Update( ) = 0;
+	virtual bool Update( float deltaTime ) = 0;
 	virtual void Render( ) = 0;
 	virtual bool Enter( ) = 0;
 	virtual void Leave( ) = 0;

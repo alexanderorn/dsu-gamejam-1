@@ -10,9 +10,10 @@ class DynamicBody
 
 public:
 	DynamicBody(b2World& world, float x, float y,
-		float32 angle, int density, int restitution, 
+		float32 angle, int density, float restitution, 
 		int friction, int angularDamping, bool isStatic,
-		float32 width, float32 height, bool originCenter);
+		float32 width, float32 height, bool originCenter,
+		int layer = 0 );
 	~DynamicBody();
 
 	//get functions
@@ -38,7 +39,7 @@ private:
 	bool m_Static;
 	int m_SpawnAngle;
 	int m_Density;
-	int m_Restitution;
+	float m_Restitution;
 	int m_Friction;
 	int m_AngularDamping;
 	bool m_OriginCenter;
@@ -46,12 +47,10 @@ private:
 
 	DynamicBody(const DynamicBody& b2b);
 
-	void initBody(b2World& world, float scale);
-
 	float m_SpawnPointX;
 	float m_SpawnPointY;
 
-	void initBody(b2World& world);
+	void initBody(b2World& world, int layer);
 
 	b2Body* mBody;
 	b2BodyDef mBodyDef;

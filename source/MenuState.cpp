@@ -85,7 +85,7 @@ MenuState::~MenuState( )
 }
 
 // Public functions
-bool MenuState::Update( )
+bool MenuState::Update( float deltaTime )
 {
 	return true;
 }

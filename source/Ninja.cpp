@@ -5,7 +5,7 @@
 
 
 Ninja::Ninja(b2World& world, std::vector<ThrowingStar*>& vector) :
-	m_Legs( world, 0.0f, 0.0f, 0, 3, 0, 1, 1, false, 32, 32, true),
+	m_Legs( world, 0.0f, 0.0f, 0, 3, 0, 1, 1, false, 32, 32, true, -2 ),
 	m_World(world),
 	m_JumpCooldown(1),
 	m_ThrowCooldown(1),
@@ -17,7 +17,10 @@ Ninja::Ninja(b2World& world, std::vector<ThrowingStar*>& vector) :
 
 Ninja::~Ninja( )
 {
-	
+	for( int i = 0; i < m_ThrowingStars.size( ); i++ )
+	{
+		delete m_ThrowingStars[ i ];
+	}
 }
 
 void Ninja::update( )
@@ -41,14 +44,14 @@ void Ninja::update( )
 		m_Legs.applyLinearImpulse(b2Vec2( 0 , -120000.0f ), m_Legs.getWorldCenter(), true);
 	}
 
+
 	//Throw
 	if( sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && !m_Shot)
 	{
 		m_Shot = true;
 		m_ThrowClock.restart();
-		m_ThrowingStars.push_back( new ThrowingStar(m_World, m_Legs.getPosition().x, m_Legs.getPosition().y, b2Vec2(1,1), 300000));
+		m_ThrowingStars.push_back( new ThrowingStar(m_World, m_Legs.getPosition().x, m_Legs.getPosition().y, b2Vec2(1,-0.2), 3000));
 	}
-
 
 	//reset cooldowns;
 	if( m_JumpClock.getElapsedTime().asSeconds() > m_JumpCooldown )

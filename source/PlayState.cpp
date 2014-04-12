@@ -27,9 +27,9 @@ PlayState::~PlayState( )
 }
 
 // Public functions
-bool PlayState::Update( )
+bool PlayState::Update( float deltaTime )
 {
-	m_pLevel->update( 0.01666f );
+	m_pLevel->update( deltaTime );
 	return true;
 }
 

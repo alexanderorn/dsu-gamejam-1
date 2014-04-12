@@ -7,13 +7,14 @@ DynamicBody::DynamicBody(b2World& world,
 						 float y,
 						 float32 angle,
 						 int density,
-						 int restitution,
+						 float restitution,
 						 int friction,
 						 int angularDamping,
 						 bool isStatic,
 						 float32 width,
 						 float32 height,
-						 bool originCenter)
+						 bool originCenter,
+						 int layer )
    :m_SpawnPointX(x),
 	m_SpawnPointY(y),
 	m_SpawnAngle(angle),
@@ -26,7 +27,7 @@ DynamicBody::DynamicBody(b2World& world,
 	m_Height(height),
 	m_OriginCenter(originCenter)
 {
-	initBody(world);
+	initBody(world, layer);
 }
 
 DynamicBody::~DynamicBody()
@@ -102,7 +103,7 @@ void DynamicBody::setPosition(b2Vec2 pos)
 	mBody->SetTransform( pos, mBody->GetAngle( ) );
 }
 
-void DynamicBody::initBody(b2World& world)
+void DynamicBody::initBody(b2World& world, int layer)
 {
 	if( m_Static )
 	{
@@ -130,6 +131,7 @@ void DynamicBody::initBody(b2World& world)
 	mBodyFix.density = m_Density;
 	mBodyFix.restitution = m_Restitution;
 	mBodyFix.friction = m_Friction;
+	mBodyFix.filter.groupIndex = layer;
 	mBody = world.CreateBody(&mBodyDef);
 	mBody->CreateFixture(&mBodyFix);
 	mBody->SetAngularDamping(m_AngularDamping);

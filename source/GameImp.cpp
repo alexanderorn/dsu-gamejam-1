@@ -112,7 +112,7 @@ bool GameImp::Update( float deltaTime )
 	}
 
 	// Update the state
-	if( pState->Update( ) == false )
+	if( pState->Update( deltaTime ) == false )
 	{
 		return false;
 	}
