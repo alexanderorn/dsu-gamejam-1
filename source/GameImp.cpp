@@ -1,6 +1,7 @@
 #include <GameImp.h>
 #include <ResourceManager.h>
 #include <SFML/Window/Event.hpp>
+#include <MenuState.h>
 #include <iostream>
 #include <MemoryLeak.h>
 
@@ -30,7 +31,10 @@ int GameImp::Run( int argv, char ** argc )
 		m_DeltaTimer.restart( );
 
 		// Update
-		Update( deltaTime );
+		if( Update( deltaTime ) == false )
+		{
+			break;
+		}
 
 		// Render
 		Render( );
@@ -38,6 +42,11 @@ int GameImp::Run( int argv, char ** argc )
 
 	// Close the game
 	return Unload( );
+}
+
+sf::RenderWindow & GameImp::GetWindow( )
+{
+	return m_Window;
 }
 
 bool GameImp::Load( )
@@ -63,6 +72,10 @@ bool GameImp::Load( )
 		return false;
 	}
 
+	// Load the start state
+	m_StateManager.Push( new MenuState( this ) );
+	m_StateManager.Update( );
+
 	return true;
 }
 
@@ -78,55 +91,43 @@ int GameImp::Unload( )
 
 bool GameImp::Update( float deltaTime )
 {
-	// Handle events
-	HandleEvents( deltaTime );
+	// Update the state manager
+	m_StateManager.Update( );
 
-	// Update the game
-	// ...
+	// Update the current state
+	State * pState = m_StateManager.GetCurrentState( );
+	if( pState == NULL )
+	{
+		return false;
+	}
 
-	return true;
-}
-
-bool GameImp::HandleEvents( float deltaTime )
-{
-	// Poll the events
+	// Poll window events to the state
 	sf::Event e;
 	while( m_Window.pollEvent( e ) )
 	{
-		switch( e.type )
+		// Send the event to the state
+		if( pState->HandleEvent( e ) == false )
 		{
-			case sf::Event::Closed:
-			{
-				m_Window.close( );
-			}
-			break;
-			case sf::Event::KeyReleased:
-			{
-				switch( e.key.code )
-				{
-					case sf::Keyboard::Escape:
-					{
-						m_Window.close( );
-					}
-					break;
-				}
-			}
-			break;
+			return false;
 		}
 	}
 
-	// Return true if succeeded
+	// Update the state
+	if( pState->Update( ) == false )
+	{
+		return false;
+	}
+
 	return true;
 }
 
 void GameImp::Render( )
 {
-	// Clear the color
-	m_Window.clear( );
+	// Render the current state
+	State * pState = m_StateManager.GetCurrentState( );
+	if( pState )
+	{
+		pState->Render( );
+	}
 
-	// Draw primitives
-	// ...
-
-	// Dislay the window
-	m_Window.display( );
 }
