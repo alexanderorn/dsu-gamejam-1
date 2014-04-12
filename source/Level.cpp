@@ -8,8 +8,8 @@
 
 Level::Level( const std::string & filename ) :
 	m_Loaded( false ),
-	m_World(b2Vec2( 0.f, 9.82f ) )/*,
-	test(m_World, 600, 200, 100, 300)*/
+	m_World(b2Vec2( 0.f, 9.82f ) )
+
 {
 	loadFromFile( filename );
 }
@@ -35,7 +35,12 @@ void Level::draw( sf::RenderTarget& target )
 	{
 		m_Platforms[ i ]->draw( target );
 	}
-	//test.draw(target);
+	
+	//render throwingstars
+	for( int i = 0; i < m_Throwingstars.size( ); i++ )
+	{
+		m_Throwingstars[ i ]->draw( target );
+	}
 }
 void Level::unload()
 {
@@ -56,7 +61,7 @@ void Level::unload()
 bool Level::loadFromFile( const std::string & filename )
 {
 	// Load the ninja
-	m_pNinja = new Ninja( m_World );
+	m_pNinja = new Ninja( m_World, m_Throwingstars);
 	m_pNinja->getBody()->setPosition(b2Vec2( 100 , 100));
 
 	// Open the file

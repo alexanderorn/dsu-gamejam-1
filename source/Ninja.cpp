@@ -4,10 +4,13 @@
 #include <MemoryLeak.h>
 
 
-Ninja::Ninja(b2World& world) :
+Ninja::Ninja(b2World& world, std::vector<ThrowingStar*>& vector) :
 	m_Legs( world, 0.0f, 0.0f, 0, 3, 0, 1, 1, false, 32, 32, true),
+	m_World(world),
 	m_JumpCooldown(1),
-	m_MaxSpeed(50)
+	m_ThrowCooldown(1),
+	m_MaxSpeed(50),
+	m_ThrowingStars(vector)
 {
 	m_Sprite.setTexture(ResourceManager::GetTexture("data/textures/ninja.png"));
 }
@@ -38,22 +41,31 @@ void Ninja::update( )
 		m_Legs.applyLinearImpulse(b2Vec2( 0 , -120000.0f ), m_Legs.getWorldCenter(), true);
 	}
 
-	//reset jumpcooldown;
+	//Throw
+	if( sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && !m_Shot)
+	{
+		m_Shot = true;
+		m_ThrowClock.restart();
+		m_ThrowingStars.push_back( new ThrowingStar(m_World, m_Legs.getPosition().x, m_Legs.getPosition().y, b2Vec2(1,1), 300000));
+	}
+
+
+	//reset cooldowns;
 	if( m_JumpClock.getElapsedTime().asSeconds() > m_JumpCooldown )
 	{
 		m_Jumping = false;
 	}
+	if( m_ThrowClock.getElapsedTime().asSeconds() > m_ThrowCooldown )
+	{
+		m_Shot = false;
+	}
 
-
-	std::cout<<m_Legs.getBody()->GetMass() << std::endl;
 }
 
 void Ninja::draw( sf::RenderTarget& target )
 {
 	m_Sprite.setPosition( m_Legs.getPosition( ).x, m_Legs.getPosition( ).y);
 	m_Sprite.setRotation( m_Legs.getAngle( ) * RADIANS_TO_DEGREES );
-	
-
 	target.draw(m_Sprite);
 }
 
@@ -98,3 +110,5 @@ void Ninja::speedlimit( )
 			m_Legs.setLinearVelocity(b2Vec2(m_Legs.getLinearVelocity().x, -m_MaxSpeed));
 		}
 }
+
+

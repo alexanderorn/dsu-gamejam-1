@@ -4,6 +4,7 @@
 #include <DynamicBody.h>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <ThrowingStar.h>
 
 class Platform;
 
@@ -32,7 +33,9 @@ private:
 	Ninja* m_pNinja;
 	typedef std::vector<Platform *> PlatformVector;
 	PlatformVector m_Platforms;
-	//Platform test;
+
+	typedef std::vector<ThrowingStar *> StarVector;
+	StarVector m_Throwingstars;
 
 
 

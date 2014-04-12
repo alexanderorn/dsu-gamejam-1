@@ -94,6 +94,7 @@
     <ClCompile Include="..\..\source\ResourceManager.cpp" />
     <ClCompile Include="..\..\source\State.cpp" />
     <ClCompile Include="..\..\source\StateManager.cpp" />
+    <ClCompile Include="..\..\source\ThrowingStar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\DynamicBody.h" />
@@ -109,6 +110,7 @@
     <ClInclude Include="..\..\include\GameImp.h" />
     <ClInclude Include="..\..\include\State.h" />
     <ClInclude Include="..\..\include\StateManager.h" />
+    <ClInclude Include="..\..\include\ThrowingStar.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
