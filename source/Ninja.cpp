@@ -5,11 +5,11 @@
 
 
 Ninja::Ninja(b2World& world, std::vector<ThrowingStar*>& vector) :
-	m_Legs( world, 0.0f/PPM, 0.0f/PPM, 0, 1.5f, 0, 0.9f, 1, false, 32.0f/PPM, 32.0f/PPM, true, -2 ),
+	m_Legs( world, 0.0f/PPM, 0.0f/PPM, 0, 1.0f, 0, 0.6f, 1, false, 32.0f/PPM, 32.0f/PPM, true, -2 ),
 	m_World(world),
 	m_JumpCooldown(1),
 	m_ThrowCooldown(1),
-	m_MaxSpeed(10),
+	m_MaxSpeed(8),
 	m_Dead(false),
 	m_ThrowingStars(vector)
 {

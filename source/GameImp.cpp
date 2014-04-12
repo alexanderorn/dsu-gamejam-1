@@ -25,7 +25,6 @@ int GameImp::Run( int argv, char ** argc )
 	m_DeltaTimer.restart( );
 	while( m_Window.isOpen( ) )
 	{
-
 		// Get the delta time
 		float deltaTime = m_DeltaTimer.getElapsedTime( ).asSeconds( );
 		m_DeltaTimer.restart( );
@@ -64,7 +63,7 @@ bool GameImp::Load( )
 		std::cout << "[GameImp::Load] Can not create the window" << std::endl;
 		return false;
 	}
-
+	m_Window.setVerticalSyncEnabled(true);
 	m_Window.setFramerateLimit( 62 );
 	// Initialize the resource manager
 	if( ResourceManager::Initialize( ) == false )
